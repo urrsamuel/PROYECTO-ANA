@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Accesorios</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="crud.css">
+</head>
+<body>
+  <header>
+    <h1>Gestión de Accesorios</h1>
+    <nav class="filters">
+      <button onclick="window.location.href='index.html'">Volver al catálogo</button>
+    </nav>
+  </header>
+
+  <!-- CRUD visual: Crear -->
+  <section class="crud">
+    <h2>Agregar Nuevo Accesorio</h2>
+    <form>
+      <label for="nombre">Nombre del accesorio</label>
+      <input type="text" id="nombre" placeholder="Ej: Manilla Azul">
+
+      <label for="categoria">Categoría</label>
+      <select id="categoria">
+        <option>Manillas</option>
+        <option>Cadenas</option>
+        <option>Collares</option>
+      </select>
+
+      <label for="precio">Precio</label>
+      <input type="number" id="precio" placeholder="Ej: 25000">
+
+      <label for="imagen">Imagen</label>
+      <input type="file" id="imagen">
+
+      <button type="submit">Agregar</button>
+    </form>
+  </section>
+
+  <!-- CRUD visual: Editar -->
+  <section class="crud">
+    <h2>Editar Accesorio</h2>
+    <form>
+      <label for="edit-id">ID del accesorio</label>
+      <input type="text" id="edit-id" placeholder="Ej: 1">
+
+      <label for="edit-nombre">Nuevo nombre</label>
+      <input type="text" id="edit-nombre" placeholder="Ej: Manilla Roja">
+
+      <label for="edit-categoria">Nueva categoría</label>
+      <select id="edit-categoria">
+        <option>Manillas</option>
+        <option>Cadenas</option>
+        <option>Collares</option>
+      </select>
+
+      <label for="edit-precio">Nuevo precio</label>
+      <input type="number" id="edit-precio" placeholder="Ej: 30000">
+
+      <label for="edit-imagen">Nueva imagen</label>
+      <input type="file" id="edit-imagen">
+
+      <button type="submit">Actualizar</button>
+    </form>
+  </section>
+
+  <!-- CRUD visual: Eliminar -->
+  <section class="crud">
+    <h2>Eliminar Accesorio</h2>
+    <form>
+      <label for="delete-id">ID del accesorio</label>
+      <input type="text" id="delete-id" placeholder="Ej: 1">
+
+      <button type="submit" class="delete-btn">Eliminar</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2026 Accesorios Artesanales</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accesorios Artesanales</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Accesorios Artesanales</h1>
+    <nav class="filters">
+      <button onclick="resetFilters()" id="btn-todo">Todos</button>
+      <button onclick="toggleCategory('Manillas')" id="btn-manillas">Manillas</button>
+      <button onclick="toggleCategory('Cadenas')" id="btn-cadenas">Cadenas</button>
+      <button onclick="toggleCategory('Collares')" id="btn-collares">Collares</button>
+      <button onclick="window.location.href='crud.html'" id="btn-crud">CRUD</button>
+    </nav>
+
+    <nav class="colors">
+      <button onclick="toggleColor('Rojo')" id="btn-rojo">Rojo</button>
+      <button onclick="toggleColor('Verde')" id="btn-verde">Verde</button>
+      <button onclick="toggleColor('Azul')" id="btn-azul">Azul</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="products" id="product-list">
+    <!-- Productos ROJOS -->
+    <div class="product-card" data-category="Manillas" data-color="Rojo"
+        onclick="openModal('Manilla Roja','Manilla artesanal color rojo.','$20.000','Rojo','https://images.pexels.com/photos/1454171/pexels-photo-1454171.jpeg')">
+        <img src="https://images.pexels.com/photos/1454171/pexels-photo-1454171.jpeg" alt="Manilla roja">
+        <h2>Manilla Roja</h2>
+        <p>$20.000</p>
+    </div>
+
+    <div class="product-card" data-category="Collares" data-color="Rojo"
+        onclick="openModal('Collar Rojo','Collar artesanal color rojo.','$30.000','Rojo','https://images.pexels.com/photos/1454174/pexels-photo-1454174.jpeg')">
+        <img src="https://images.pexels.com/photos/1454174/pexels-photo-1454174.jpeg" alt="Collar rojo">
+        <h2>Collar Rojo</h2>
+        <p>$30.000</p>
+    </div>
+
+    <div class="product-card" data-category="Cadenas" data-color="Rojo"
+        onclick="openModal('Cadena Roja','Cadena artesanal color rojo.','$40.000','Rojo','https://images.pexels.com/photos/1454175/pexels-photo-1454175.jpeg')">
+        <img src="https://images.pexels.com/photos/1454175/pexels-photo-1454175.jpeg" alt="Cadena roja">
+        <h2>Cadena Roja</h2>
+        <p>$40.000</p>
+    </div>
+
+    <div class="product-card" data-category="Aretes" data-color="Rojo"
+        onclick="openModal('Aretes Rojos','Aretes artesanales color rojo.','$25.000','Rojo','https://images.pexels.com/photos/1454176/pexels-photo-1454176.jpeg')">
+        <img src="https://images.pexels.com/photos/1454176/pexels-photo-1454176.jpeg" alt="Aretes rojos">
+        <h2>Aretes Rojos</h2>
+        <p>$25.000</p>
+    </div>
+
+    <div class="product-card" data-category="Pulseras" data-color="Rojo"
+        onclick="openModal('Pulsera Roja','Pulsera artesanal color rojo.','$22.000','Rojo','https://images.pexels.com/photos/1454177/pexels-photo-1454177.jpeg')">
+        <img src="https://images.pexels.com/photos/1454177/pexels-photo-1454177.jpeg" alt="Pulsera roja">
+        <h2>Pulsera Roja</h2>
+        <p>$22.000</p>
+    </div>
+
+    <!-- Productos VERDES -->
+    <div class="product-card" data-category="Collares" data-color="Verde"
+        onclick="openModal('Collar Verde','Collar artesanal color verde.','$35.000','Verde','https://images.pexels.com/photos/1454172/pexels-photo-1454172.jpeg')">
+        <img src="https://images.pexels.com/photos/1454172/pexels-photo-1454172.jpeg" alt="Collar verde">
+        <h2>Collar Verde</h2>
+        <p>$35.000</p>
+    </div>
+
+    <div class="product-card" data-category="Manillas" data-color="Verde"
+        onclick="openModal('Manilla Verde','Manilla artesanal color verde.','$20.000','Verde','https://images.pexels.com/photos/1454178/pexels-photo-1454178.jpeg')">
+        <img src="https://images.pexels.com/photos/1454178/pexels-photo-1454178.jpeg" alt="Manilla verde">
+        <h2>Manilla Verde</h2>
+        <p>$20.000</p>
+    </div>
+
+    <div class="product-card" data-category="Cadenas" data-color="Verde"
+        onclick="openModal('Cadena Verde','Cadena artesanal color verde.','$40.000','Verde','https://images.pexels.com/photos/1454179/pexels-photo-1454179.jpeg')">
+        <img src="https://images.pexels.com/photos/1454179/pexels-photo-1454179.jpeg" alt="Cadena verde">
+        <h2>Cadena Verde</h2>
+        <p>$40.000</p>
+    </div>
+
+    <div class="product-card" data-category="Aretes" data-color="Verde"
+        onclick="openModal('Aretes Verdes','Aretes artesanales color verde.','$25.000','Verde','https://images.pexels.com/photos/1454180/pexels-photo-1454180.jpeg')">
+        <img src="https://images.pexels.com/photos/1454180/pexels-photo-1454180.jpeg" alt="Aretes verdes">
+        <h2>Aretes Verdes</h2>
+        <p>$25.000</p>
+    </div>
+
+    <div class="product-card" data-category="Pulseras" data-color="Verde"
+        onclick="openModal('Pulsera Verde','Pulsera artesanal color verde.','$22.000','Verde','https://images.pexels.com/photos/1454181/pexels-photo-1454181.jpeg')">
+        <img src="https://images.pexels.com/photos/1454181/pexels-photo-1454181.jpeg" alt="Pulsera verde">
+        <h2>Pulsera Verde</h2>
+        <p>$22.000</p>
+    </div>
+
+    <!-- Productos AZULES -->
+    <div class="product-card" data-category="Cadenas" data-color="Azul"
+        onclick="openModal('Cadena Azul','Cadena artesanal color azul.','$40.000','Azul','https://images.pexels.com/photos/1454173/pexels-photo-1454173.jpeg')">
+        <img src="https://images.pexels.com/photos/1454173/pexels-photo-1454173.jpeg" alt="Cadena azul">
+        <h2>Cadena Azul</h2>
+        <p>$40.000</p>
+    </div>
+
+    <div class="product-card" data-category="Collares" data-color="Azul"
+        onclick="openModal('Collar Azul','Collar artesanal color azul.','$35.000','Azul','https://images.pexels.com/photos/1454182/pexels-photo-1454182.jpeg')">
+        <img src="https://images.pexels.com/photos/1454182/pexels-photo-1454182.jpeg" alt="Collar azul">
+        <h2>Collar Azul</h2>
+        <p>$35.000</p>
+    </div>
+
+    <div class="product-card" data-category="Manillas" data-color="Azul"
+        onclick="openModal('Manilla Azul','Manilla artesanal color azul.','$20.000','Azul','https://images.pexels.com/photos/1454183/pexels-photo-1454183.jpeg')">
+        <img src="https://images.pexels.com/photos/1454183/pexels-photo-1454183.jpeg" alt="Manilla azul">
+        <h2>Manilla Azul</h2>
+        <p>$20.000</p>
+    </div>
+
+    <div class="product-card" data-category="Aretes" data-color="Azul"
+        onclick="openModal('Aretes Azules','Aretes artesanales color azul.','$25.000','Azul','https://images.pexels.com/photos/1454184/pexels-photo-1454184.jpeg')">
+        <img src="https://images.pexels.com/photos/1454184/pexels-photo-1454184.jpeg" alt="Aretes azules">
+        <h2>Aretes Azules</h2>
+        <p>$25.000</p>
+    </div>
+
+    <div class="product-card" data-category="Pulseras" data-color="Azul"
+        onclick="openModal('Pulsera Azul','Pulsera artesanal color azul.','$22.000','Azul','https://images.pexels.com/photos/1454185/pexels-photo-1454185.jpeg')">
+        <img src="https://images.pexels.com/photos/1454185/pexels-photo-1454185.jpeg" alt="Pulsera azul">
+        <h2>Pulsera Azul</h2>
+        <p>$22.000</p>
+    </div>
+    </section>
+
+
+    <!-- Botón centrado para limpiar filtros -->
+    <button class="reset-btn" onclick="resetFilters()">Limpiar filtros</button>
+
+    <!-- Mensaje cuando no hay productos -->
+    <p id="no-products-message" style="display:none;">
+      No hay productos disponibles en esta categoría con ese color por el momento.
+    </p>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content animate" id="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <img id="modal-img" src="" alt="Producto" />
+      <h2 id="modal-title"></h2>
+      <p id="modal-price"></p>
+      <p id="modal-desc"></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 Accesorios Artesanales</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

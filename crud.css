@@ -1,0 +1,56 @@
+/* Estilos exclusivos para el CRUD */
+
+.crud {
+  background: #e6d8c3;
+  padding: 30px;
+  margin: 40px auto;
+  border-radius: 15px;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.crud h2 {
+  text-align: center;
+  font-family: 'Brush Script MT', cursive;
+  color: #b8860b;
+  margin-bottom: 20px;
+}
+
+.crud form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.crud input,
+.crud select,
+.crud button {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.crud button {
+  background: #cbb89e;
+  color: #b8860b;
+  font-family: 'Brush Script MT', cursive;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.crud button:hover {
+  background: #bfa88a;
+  transform: scale(1.05);
+}
+
+/* Botón eliminar */
+.crud .delete-btn {
+  background: #e17055;
+  color: #fff;
+  font-family: 'Brush Script MT', cursive;
+}
+
+.crud .delete-btn:hover {
+  background: #c44536;
+}
