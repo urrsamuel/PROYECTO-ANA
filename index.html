@@ -3,163 +3,221 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accesorios Artesanales</title>
+  <title>ANNETA Accesorios</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
-    <h1>Accesorios Artesanales</h1>
-    <nav class="filters">
-      <button onclick="resetFilters()" id="btn-todo">Todos</button>
-      <button onclick="toggleCategory('Manillas')" id="btn-manillas">Manillas</button>
-      <button onclick="toggleCategory('Cadenas')" id="btn-cadenas">Cadenas</button>
-      <button onclick="toggleCategory('Collares')" id="btn-collares">Collares</button>
-      <button onclick="window.location.href='crud.html'" id="btn-crud">CRUD</button>
+    <h1>ANNETA Accesorios</h1>
+    <nav class="filtros">
+      <button onclick="limpiarFiltros()" id="boton-todos">Todos</button>
+      <button onclick="cambiarCategoria('Manillas')" id="boton-manillas">Manillas</button>
+      <button onclick="cambiarCategoria('Cadenas')" id="boton-cadenas">Cadenas</button>
+      <button onclick="cambiarCategoria('Collares')" id="boton-collares">Collares</button>
+      <button onclick="window.location.href='crud.html'" id="boton-crud">CRUD</button>
     </nav>
 
-    <nav class="colors">
-      <button onclick="toggleColor('Rojo')" id="btn-rojo">Rojo</button>
-      <button onclick="toggleColor('Verde')" id="btn-verde">Verde</button>
-      <button onclick="toggleColor('Azul')" id="btn-azul">Azul</button>
+    <nav class="filtros-color">
+      <button onclick="cambiarColor('Rojo')" id="boton-rojo">Rojo</button>
+      <button onclick="cambiarColor('Verde')" id="boton-verde">Verde</button>
+      <button onclick="cambiarColor('Azul')" id="boton-azul">Azul</button>
     </nav>
   </header>
 
   <main>
-    <section class="products" id="product-list">
-    <!-- Productos ROJOS -->
-    <div class="product-card" data-category="Manillas" data-color="Rojo"
-        onclick="openModal('Manilla Roja','Manilla artesanal color rojo.','$20.000','Rojo','https://images.pexels.com/photos/1454171/pexels-photo-1454171.jpeg')">
-        <img src="https://images.pexels.com/photos/1454171/pexels-photo-1454171.jpeg" alt="Manilla roja">
+    <section class="lista-productos" id="lista-productos">
+
+
+
+      <div class="tarjeta-producto" data-categoria="Manillas" data-color="Rojo"
+        onclick="mostrarProducto('Manilla Roja','Manilla artesanal color rojo.','$20.000','Rojo','./imagenes/manillas_rojas/Manilla_Collar1.jpeg')">
+        <img src="./imagenes/manillas_rojas/Manilla_Collar1.jpeg" alt="Manilla roja">
         <h2>Manilla Roja</h2>
         <p>$20.000</p>
     </div>
 
-    <div class="product-card" data-category="Collares" data-color="Rojo"
-        onclick="openModal('Collar Rojo','Collar artesanal color rojo.','$30.000','Rojo','https://images.pexels.com/photos/1454174/pexels-photo-1454174.jpeg')">
-        <img src="https://images.pexels.com/photos/1454174/pexels-photo-1454174.jpeg" alt="Collar rojo">
+    <div class="tarjeta-producto" data-categoria="Collares" data-color="Rojo"
+        onclick="mostrarProducto('Llavero Rojo','Llavero artesanal color rojo.','$30.000','Rojo',' ./imagenes/manillas_rojas/llaveros_rojos.jpeg')">
+        <img src="./imagenes/manillas_rojas/llaveros_rojos.jpeg" alt="Llavero rojo">
         <h2>Collar Rojo</h2>
         <p>$30.000</p>
     </div>
 
-    <div class="product-card" data-category="Cadenas" data-color="Rojo"
-        onclick="openModal('Cadena Roja','Cadena artesanal color rojo.','$40.000','Rojo','https://images.pexels.com/photos/1454175/pexels-photo-1454175.jpeg')">
-        <img src="https://images.pexels.com/photos/1454175/pexels-photo-1454175.jpeg" alt="Cadena roja">
+    <div class="tarjeta-producto" data-categoria="Cadenas" data-color="Rojo"
+        onclick="mostrarProducto('Cadena Roja','Cadena artesanal color rojo.','$40.000','Rojo',' ./imagenes/manillas_rojas/manilla_roja1.jpeg')">
+        <img src="./imagenes/manillas_rojas/manilla_roja1.jpeg" alt="Cadena roja">
         <h2>Cadena Roja</h2>
         <p>$40.000</p>
     </div>
 
-    <div class="product-card" data-category="Aretes" data-color="Rojo"
-        onclick="openModal('Aretes Rojos','Aretes artesanales color rojo.','$25.000','Rojo','https://images.pexels.com/photos/1454176/pexels-photo-1454176.jpeg')">
-        <img src="https://images.pexels.com/photos/1454176/pexels-photo-1454176.jpeg" alt="Aretes rojos">
+    <div class="tarjeta-producto" data-categoria="Aretes" data-color="Rojo"
+        onclick="mostrarProducto('Aretes Rojos','Aretes artesanales color rojo.','$25.000','Rojo','./imagenes/manillas_rojas/manilla_roja2.jpeg')">
+        <img src="./imagenes/manillas_rojas/manilla_roja2.jpeg" alt="Aretes rojos">
         <h2>Aretes Rojos</h2>
         <p>$25.000</p>
     </div>
 
-    <div class="product-card" data-category="Pulseras" data-color="Rojo"
-        onclick="openModal('Pulsera Roja','Pulsera artesanal color rojo.','$22.000','Rojo','https://images.pexels.com/photos/1454177/pexels-photo-1454177.jpeg')">
-        <img src="https://images.pexels.com/photos/1454177/pexels-photo-1454177.jpeg" alt="Pulsera roja">
+    <div class="tarjeta-producto" data-categoria="Pulseras" data-color="Rojo"
+        onclick="mostrarProducto('Pulsera Roja','Pulsera artesanal color rojo.','$22.000','Rojo',' ./imagenes/manillas_rojas/manilla_roja3.jpeg')">
+        <img src="./imagenes/manillas_rojas/manilla_roja3.jpeg" alt="Pulsera roja">
+        <h2>Pulsera Roja</h2>
+        <p>$22.000</p>
+    </div>
+    <div class="tarjeta-producto" data-categoria="Pulseras" data-color="Rojo"
+        onclick="mostrarProducto('Pulsera Roja','Pulsera artesanal color rojo.','$22.000','Rojo','./imagenes/manillas_rojas/manilla_roja4.jpeg')">
+        <img src="./imagenes/manillas_rojas/manilla_roja4.jpeg" alt="Pulsera roja">
         <h2>Pulsera Roja</h2>
         <p>$22.000</p>
     </div>
 
-    <!-- Productos VERDES -->
-    <div class="product-card" data-category="Collares" data-color="Verde"
-        onclick="openModal('Collar Verde','Collar artesanal color verde.','$35.000','Verde','https://images.pexels.com/photos/1454172/pexels-photo-1454172.jpeg')">
-        <img src="https://images.pexels.com/photos/1454172/pexels-photo-1454172.jpeg" alt="Collar verde">
+
+
+
+
+
+    <div class="tarjeta-producto" data-categoria="Collares" data-color="Verde"
+        onclick="mostrarProducto('Collar Verde','Collar artesanal color verde.','$35.000','Verde','./imagenes/manillas_verdes/manillas_verdes1.jpeg')">
+        <img src="./imagenes/manillas_verdes/manillas_verdes1.jpeg" alt="Collar verde">
         <h2>Collar Verde</h2>
         <p>$35.000</p>
     </div>
 
-    <div class="product-card" data-category="Manillas" data-color="Verde"
-        onclick="openModal('Manilla Verde','Manilla artesanal color verde.','$20.000','Verde','https://images.pexels.com/photos/1454178/pexels-photo-1454178.jpeg')">
-        <img src="https://images.pexels.com/photos/1454178/pexels-photo-1454178.jpeg" alt="Manilla verde">
+    <div class="tarjeta-producto" data-categoria="Manillas" data-color="Verde"
+        onclick="mostrarProducto('Manilla Verde','Manilla artesanal color verde.','$20.000','Verde','./imagenes/manillas_verdes/manilla_verde2.jpeg')">
+        <img src="./imagenes/manillas_verdes/manilla_verde2.jpeg" alt="Manilla verde">
         <h2>Manilla Verde</h2>
         <p>$20.000</p>
     </div>
 
-    <div class="product-card" data-category="Cadenas" data-color="Verde"
-        onclick="openModal('Cadena Verde','Cadena artesanal color verde.','$40.000','Verde','https://images.pexels.com/photos/1454179/pexels-photo-1454179.jpeg')">
-        <img src="https://images.pexels.com/photos/1454179/pexels-photo-1454179.jpeg" alt="Cadena verde">
+    <div class="tarjeta-producto" data-categoria="Cadenas" data-color="Verde"
+        onclick="mostrarProducto('Cadena Verde','Cadena artesanal color verde.','$40.000','Verde','./imagenes/manillas_verdes/manilla_verde3.jpeg ')">
+        <img src="./imagenes/manillas_verdes/manilla_verde3.jpeg" alt="Cadena verde">
         <h2>Cadena Verde</h2>
         <p>$40.000</p>
     </div>
 
-    <div class="product-card" data-category="Aretes" data-color="Verde"
-        onclick="openModal('Aretes Verdes','Aretes artesanales color verde.','$25.000','Verde','https://images.pexels.com/photos/1454180/pexels-photo-1454180.jpeg')">
-        <img src="https://images.pexels.com/photos/1454180/pexels-photo-1454180.jpeg" alt="Aretes verdes">
+    <div class="tarjeta-producto" data-categoria="Aretes" data-color="Verde"
+        onclick="mostrarProducto('Aretes Verdes','Aretes artesanales color verde.','$25.000','Verde',' ./imagenes/manillas_verdes/manillas_verdes4.jpeg')">
+        <img src="./imagenes/manillas_verdes/manillas_verdes4.jpeg" alt="Aretes verdes">
+        <h2>Aretes Verdes</h2>
+        <p>$25.000</p>
+    </div>
+    <div class="tarjeta-producto" data-categoria="Aretes" data-color="Verde"
+        onclick="mostrarProducto('Aretes Verdes','Aretes artesanales color verde.','$25.000','Verde','./imagenes/manillas_verdes/manilla_verde5.jpeg')">
+        <img src="./imagenes/manillas_verdes/manilla_verde5.jpeg" alt="Aretes verdes">
         <h2>Aretes Verdes</h2>
         <p>$25.000</p>
     </div>
 
-    <div class="product-card" data-category="Pulseras" data-color="Verde"
-        onclick="openModal('Pulsera Verde','Pulsera artesanal color verde.','$22.000','Verde','https://images.pexels.com/photos/1454181/pexels-photo-1454181.jpeg')">
-        <img src="https://images.pexels.com/photos/1454181/pexels-photo-1454181.jpeg" alt="Pulsera verde">
+    <div class="tarjeta-producto" data-categoria="Pulseras" data-color="Verde"
+        onclick="mostrarProducto('Pulsera Verde','Pulsera artesanal color verde.','$22.000','Verde','   ')">
+        <img src="" alt="Pulsera verde">
+        <h2>Pulsera Verde</h2>
+        <p>$22.000</p>
+    </div>
+    <div class="tarjeta-producto" data-categoria="Pulseras" data-color="Verde"
+        onclick="mostrarProducto('Pulsera Verde','Pulsera artesanal color verde.','$22.000','Verde','  ')">
+        <img src="" alt="Pulsera verde">
         <h2>Pulsera Verde</h2>
         <p>$22.000</p>
     </div>
 
-    <!-- Productos AZULES -->
-    <div class="product-card" data-category="Cadenas" data-color="Azul"
-        onclick="openModal('Cadena Azul','Cadena artesanal color azul.','$40.000','Azul','https://images.pexels.com/photos/1454173/pexels-photo-1454173.jpeg')">
-        <img src="https://images.pexels.com/photos/1454173/pexels-photo-1454173.jpeg" alt="Cadena azul">
+
+
+
+
+
+
+
+
+    <div class="tarjeta-producto" data-categoria="Cadenas" data-color="Azul"
+        onclick="mostrarProducto('Cadena Azul','Cadena artesanal color azul.','$40.000','Azul','./imagenes/manillas_azules/manilla_azul1.jpeg')">
+        <img src="./imagenes/manillas_azules/manilla_azul1.jpeg" alt="Cadena azul">
+        <h2>Cadena Azul</h2>
+        <p>$40.000</p>
+    </div>
+    <div class="tarjeta-producto" data-categoria="Cadenas" data-color="Azul"
+        onclick="mostrarProducto('Cadena Azul','Cadena artesanal color azul.','$40.000','Azul','./imagenes/manillas_azules/manilla_azul2.jpeg')">
+        <img src="./imagenes/manillas_azules/manilla_azul2.jpeg" alt="Cadena azul">
         <h2>Cadena Azul</h2>
         <p>$40.000</p>
     </div>
 
-    <div class="product-card" data-category="Collares" data-color="Azul"
-        onclick="openModal('Collar Azul','Collar artesanal color azul.','$35.000','Azul','https://images.pexels.com/photos/1454182/pexels-photo-1454182.jpeg')">
-        <img src="https://images.pexels.com/photos/1454182/pexels-photo-1454182.jpeg" alt="Collar azul">
+    <div class="tarjeta-producto" data-categoria="Collares" data-color="Azul"
+        onclick="mostrarProducto('Collar Azul','Collar artesanal color azul.','$35.000','Azul','./imagenes/manillas_azules/manilla_azul3.jpeg')">
+        <img src="./imagenes/manillas_azules/manilla_azul3.jpeg" alt="Collar azul">
+        <h2>Collar Azul</h2>
+        <p>$35.000</p>
+    </div>
+    <div class="tarjeta-producto" data-categoria="Collares" data-color="Azul"
+        onclick="mostrarProducto('Collar Azul','Collar artesanal color azul.','$35.000','Azul','./imagenes/manillas_azules/manillas_azul4.jpeg')">
+        <img src="./imagenes/manillas_azules/manillas_azul4.jpeg" alt="Collar azul">
         <h2>Collar Azul</h2>
         <p>$35.000</p>
     </div>
 
-    <div class="product-card" data-category="Manillas" data-color="Azul"
-        onclick="openModal('Manilla Azul','Manilla artesanal color azul.','$20.000','Azul','https://images.pexels.com/photos/1454183/pexels-photo-1454183.jpeg')">
-        <img src="https://images.pexels.com/photos/1454183/pexels-photo-1454183.jpeg" alt="Manilla azul">
+    <div class="tarjeta-producto" data-categoria="Manillas" data-color="Azul"
+        onclick="mostrarProducto('Manilla Azul','Manilla artesanal color azul.','$20.000','Azul','./imagenes/manillas_azules/manillas_azul5.jpeg')">
+        <img src="./imagenes/manillas_azules/manillas_azul5.jpeg" alt="Manilla azul">
         <h2>Manilla Azul</h2>
         <p>$20.000</p>
     </div>
 
-    <div class="product-card" data-category="Aretes" data-color="Azul"
-        onclick="openModal('Aretes Azules','Aretes artesanales color azul.','$25.000','Azul','https://images.pexels.com/photos/1454184/pexels-photo-1454184.jpeg')">
-        <img src="https://images.pexels.com/photos/1454184/pexels-photo-1454184.jpeg" alt="Aretes azules">
+    <div class="tarjeta-producto" data-categoria="Aretes" data-color="Azul"
+        onclick="mostrarProducto('Aretes Azules','Aretes artesanales color azul.','$25.000','Azul','./imagenes/manillas_azules/manilla_azul6.jpeg')">
+        <img src="./imagenes/manillas_azules/manilla_azul6.jpeg" alt="Aretes azules">
         <h2>Aretes Azules</h2>
         <p>$25.000</p>
     </div>
 
-    <div class="product-card" data-category="Pulseras" data-color="Azul"
-        onclick="openModal('Pulsera Azul','Pulsera artesanal color azul.','$22.000','Azul','https://images.pexels.com/photos/1454185/pexels-photo-1454185.jpeg')">
-        <img src="https://images.pexels.com/photos/1454185/pexels-photo-1454185.jpeg" alt="Pulsera azul">
+    <div class="tarjeta-producto" data-categoria="Pulseras" data-color="Azul"
+        onclick="mostrarProducto('Pulsera Azul','Pulsera artesanal color azul.','$22.000','Azul','./imagenes/manillas_azules/manillas_azul7.jpeg')">
+        <img src="./imagenes/manillas_azules/manillas_azul7.jpeg" alt="Pulsera azul">
         <h2>Pulsera Azul</h2>
         <p>$22.000</p>
     </div>
     </section>
 
 
-    <!-- Botón centrado para limpiar filtros -->
-    <button class="reset-btn" onclick="resetFilters()">Limpiar filtros</button>
+    <button class="boton-limpiar-filtros" onclick="limpiarFiltros()">Limpiar filtros</button>
 
-    <!-- Mensaje cuando no hay productos -->
-    <p id="no-products-message" style="display:none;">
+    <p id="mensaje-sin-productos" style="display:none;">
       No hay productos disponibles en esta categoría con ese color por el momento.
     </p>
   </main>
 
-  <!-- Modal -->
-  <div id="modal" class="modal">
-    <div class="modal-content animate" id="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <img id="modal-img" src="" alt="Producto" />
-      <h2 id="modal-title"></h2>
-      <p id="modal-price"></p>
-      <p id="modal-desc"></p>
+  <div id="ventana-producto" class="ventana-producto">
+    <div class="contenido-producto" id="contenido-producto">
+      <span class="cerrar-ventana" onclick="cerrarProducto()">&times;</span>
+      <img id="imagen-producto" src="" alt="Producto" />
+      <h2 id="titulo-producto"></h2>
+      <p id="precio-producto"></p>
+      <p id="descripcion-producto"></p>
     </div>
   </div>
 
-  <footer>
-    <p>© 2026 Accesorios Artesanales</p>
-  </footer>
+<footer>
+  <div class="pie-izquierdo">
+    <a href="https://www.facebook.com/cliente" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" class="icono-red-social">
+    </a>
+    <a href="https://www.instagram.com/anetacartagena/" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="icono-red-social">
+    </a>
+    <a href="https://wa.me/573053087628" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="icono-red-social">
+    </a>
+  </div>
 
-  <script src="script.js"></script>
+  <div class="pie-centro">
+    <p>© 2026 Anneta Accesorios</p>
+  </div>
+
+  <div class="pie-derecho">
+    <a href="tel:+573053087628" class="telefono-contacto">📞 +57 305 3087628</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>

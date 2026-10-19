@@ -3,82 +3,82 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestión de Accesorios</title>
+  <title>Administrar catálogo</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="crud.css">
 </head>
 <body>
   <header>
-    <h1>Gestión de Accesorios</h1>
-    <nav class="filters">
-      <button onclick="window.location.href='index.html'">Volver al catálogo</button>
+    <h1>Administrar catálogo</h1>
+    <nav class="filtros">
+      <button onclick="window.location.href='index.html'">Regresar al catálogo</button>
     </nav>
   </header>
 
-  <!-- CRUD visual: Crear -->
-  <section class="crud">
-    <h2>Agregar Nuevo Accesorio</h2>
+  <!-- Formulario de gestión: Crear -->
+  <section class="seccion-gestion">
+    <h2>Agregar producto</h2>
     <form>
-      <label for="nombre">Nombre del accesorio</label>
-      <input type="text" id="nombre" placeholder="Ej: Manilla Azul">
+      <label for="nombre-producto">Nombre del accesorio</label>
+      <input type="text" id="nombre-producto" placeholder="Ej: Manilla Azul">
 
-      <label for="categoria">Categoría</label>
-      <select id="categoria">
+      <label for="categoria-producto">Categoría</label>
+      <select id="categoria-producto">
         <option>Manillas</option>
         <option>Cadenas</option>
         <option>Collares</option>
       </select>
 
-      <label for="precio">Precio</label>
-      <input type="number" id="precio" placeholder="Ej: 25000">
+      <label for="precio-producto">Precio</label>
+      <input type="number" id="precio-producto" placeholder="Ej: 25000">
 
-      <label for="imagen">Imagen</label>
-      <input type="file" id="imagen">
+      <label for="imagen-producto">Imagen</label>
+      <input type="file" id="imagen-producto">
 
       <button type="submit">Agregar</button>
     </form>
   </section>
 
-  <!-- CRUD visual: Editar -->
-  <section class="crud">
-    <h2>Editar Accesorio</h2>
+  <!-- Formulario de gestión: Editar -->
+  <section class="seccion-gestion">
+    <h2>Editar producto</h2>
     <form>
-      <label for="edit-id">ID del accesorio</label>
-      <input type="text" id="edit-id" placeholder="Ej: 1">
+      <label for="id-edicion">Número de producto</label>
+      <input type="text" id="id-edicion" placeholder="Ej: 1">
 
-      <label for="edit-nombre">Nuevo nombre</label>
-      <input type="text" id="edit-nombre" placeholder="Ej: Manilla Roja">
+      <label for="nombre-edicion">Nuevo nombre</label>
+      <input type="text" id="nombre-edicion" placeholder="Ej: Manilla Roja">
 
-      <label for="edit-categoria">Nueva categoría</label>
-      <select id="edit-categoria">
+      <label for="categoria-edicion">Nueva categoría</label>
+      <select id="categoria-edicion">
         <option>Manillas</option>
         <option>Cadenas</option>
         <option>Collares</option>
       </select>
 
-      <label for="edit-precio">Nuevo precio</label>
-      <input type="number" id="edit-precio" placeholder="Ej: 30000">
+      <label for="precio-edicion">Nuevo precio</label>
+      <input type="number" id="precio-edicion" placeholder="Ej: 30000">
 
-      <label for="edit-imagen">Nueva imagen</label>
-      <input type="file" id="edit-imagen">
+      <label for="imagen-edicion">Nueva imagen</label>
+      <input type="file" id="imagen-edicion">
 
       <button type="submit">Actualizar</button>
     </form>
   </section>
 
-  <!-- CRUD visual: Eliminar -->
-  <section class="crud">
-    <h2>Eliminar Accesorio</h2>
+  <!-- Formulario de gestión: Eliminar -->
+  <section class="seccion-gestion">
+    <h2>Eliminar producto</h2>
     <form>
-      <label for="delete-id">ID del accesorio</label>
-      <input type="text" id="delete-id" placeholder="Ej: 1">
+      <label for="id-eliminar">Número de producto</label>
+      <input type="text" id="id-eliminar" placeholder="Ej: 1">
 
-      <button type="submit" class="delete-btn">Eliminar</button>
+      <button type="submit" class="boton-eliminar">Eliminar</button>
     </form>
   </section>
 
   <footer>
-    <p>© 2026 Accesorios Artesanales</p>
+    <p>© 2026 Anneta Accesorios</p>
   </footer>
 </body>
 </html>

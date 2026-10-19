@@ -1,6 +1,6 @@
-/* Estilos exclusivos para el CRUD */
+/* Estilos de la sección de gestión */
 
-.crud {
+.seccion-gestion {
   background: #e6d8c3;
   padding: 30px;
   margin: 40px auto;
@@ -9,29 +9,29 @@
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.crud h2 {
+.seccion-gestion h2 {
   text-align: center;
   font-family: 'Brush Script MT', cursive;
   color: #b8860b;
   margin-bottom: 20px;
 }
 
-.crud form {
+.seccion-gestion form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.crud input,
-.crud select,
-.crud button {
+.seccion-gestion input,
+.seccion-gestion select,
+.seccion-gestion button {
   padding: 12px;
   border-radius: 10px;
   border: 1px solid #ccc;
   font-family: 'Segoe UI', sans-serif;
 }
 
-.crud button {
+.seccion-gestion button {
   background: #cbb89e;
   color: #b8860b;
   font-family: 'Brush Script MT', cursive;
@@ -39,18 +39,41 @@
   transition: 0.3s;
 }
 
-.crud button:hover {
+.seccion-gestion button:hover {
   background: #bfa88a;
   transform: scale(1.05);
 }
 
 /* Botón eliminar */
-.crud .delete-btn {
+.seccion-gestion .boton-eliminar {
   background: #e17055;
   color: #fff;
   font-family: 'Brush Script MT', cursive;
 }
 
-.crud .delete-btn:hover {
+.seccion-gestion .boton-eliminar:hover {
   background: #c44536;
+}
+
+/* Ajustes para pantallas pequeñas y medianas */
+@media (max-width: 600px) {
+  .seccion-gestion {
+    width: 90%;
+    padding: 20px;
+  }
+  .seccion-gestion h2 {
+    font-size: 1.5em;
+  }
+  .seccion-gestion input,
+  .seccion-gestion select,
+  .seccion-gestion button {
+    font-size: 0.9em;
+    padding: 10px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .seccion-gestion {
+    width: 80%;
+  }
 }

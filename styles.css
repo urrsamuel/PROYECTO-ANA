@@ -1,53 +1,165 @@
-/* Colores dinámicos */
-body.rojo {
-  background-color: #ffe5e5;
+body.rojo { background-color: #ffe5e5; }
+body.verde { background-color: #e5ffe5; }
+body.azul { background-color: #e5f0ff; }
+
+header {
+  text-align: center;
+  padding: 20px;
+  background: #d9cbb7;
 }
-body.verde {
-  background-color: #e5ffe5;
-}
-body.azul {
-  background-color: #e5f0ff;
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #d9cbb7;
+  padding: 15px 40px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
-.colors {
-  margin-top: 10px;
+.pie-izquierdo, .pie-centro, .pie-derecho {
+  display: flex;
+  align-items: center;
+}
+
+.pie-centro {
+  flex: 1;
+  justify-content: center;
   text-align: center;
 }
 
-.colors button {
-  background: #ddd;
+.pie-derecho {
+  margin-left: auto;
+  padding-right: 50px;
+}
+
+.icono-red-social {
+  width: 28px;
+  height: 28px;
+  margin: 0 15px;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.icono-red-social:hover {
+  transform: scale(1.2);
+}
+
+
+.telefono-contacto {
+  font-weight: bold;
+  color: #b8860b;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.telefono-contacto:hover {
+  color: #c44536;
+}
+
+@media (max-width: 600px) {
+  footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+  .pie-izquierdo, .pie-derecho {
+    margin: 30px 10px;
+    padding: 10px;
+  }
+}
+
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f2e6d9;
+  margin: 0;
+  padding: 0;
+  color: #b8860b;
+}
+h1, h2, p, label {
+  font-family: 'Brush Script MT', cursive;
+  color: #b8860b;
+}
+
+.filtros button,
+.filtros-color button {
+  background: #cbb89e;
   border: none;
   padding: 10px 20px;
   margin: 5px;
   border-radius: 20px;
   cursor: pointer;
   font-family: 'Brush Script MT', cursive;
+  color: #b8860b;
   transition: 0.3s;
 }
-.colors button:hover {
-  background: #bbb;
+.filtros button:hover,
+.filtros-color button:hover {
+  background: #bfa88a;
 }
 
-/* Botones activos */
-.filters button.active,
-.colors button.active {
-  background: #a68c6d; /* tono más oscuro */
+#boton-todos {
+  background: #d4af37;
+  color: #fff;
+  font-weight: bold;
+}
+#boton-todos.activo {
+  background: #b8860b;
   color: #fff;
 }
 
-/* Fondo dinámico del modal con degradado */
-#modal-content.rojo {
-  background: linear-gradient(to bottom, #ffcccc, #ffffff);
-}
-#modal-content.verde {
-  background: linear-gradient(to bottom, #ccffcc, #ffffff);
-}
-#modal-content.azul {
-  background: linear-gradient(to bottom, #cce5ff, #ffffff);
+.filtros button.activo,
+.filtros-color button.activo {
+  background: #a68c6d;
+  color: #fff;
 }
 
-/* Mensaje sin productos */
-#no-products-message {
+.lista-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  padding: 40px;
+}
+.tarjeta-producto {
+  background: #fffaf0;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+.tarjeta-producto img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.tarjeta-producto:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.boton-limpiar-filtros {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background: #d4af37;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: 'Brush Script MT', cursive;
+  transition: 0.3s;
+}
+.boton-limpiar-filtros:hover {
+  background: #b8860b;
+  transform: scale(1.05);
+}
+
+#mensaje-sin-productos {
   font-size: 1.1em;
   margin-top: 20px;
   text-align: center;
@@ -59,108 +171,7 @@ body.azul {
   background: #fffaf0;
 }
 
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f2e6d9;
-  margin: 0;
-  padding: 0;
-  color: #b8860b;
-}
-
-h1, h2, p, label {
-  font-family: 'Brush Script MT', cursive;
-  color: #b8860b;
-}
-
-header {
-  text-align: center;
-  padding: 20px;
-  background: #d9cbb7;
-}
-
-footer {
-  text-align: center;
-  padding: 15px;
-  background: #d9cbb7;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-}
-
-.filters button {
-  background: #cbb89e;
-  border: none;
-  padding: 10px 20px;
-  margin: 5px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-family: 'Brush Script MT', cursive;
-  color: #b8860b;
-  transition: 0.3s;
-}
-.filters button:hover {
-  background: #bfa88a;
-}
-
-/* Botón Todos dorado en el header */
-#btn-todo {
-  background: #d4af37; /* dorado */
-  color: #fff;
-  font-weight: bold;
-}
-#btn-todo.active {
-  background: #b8860b; /* dorado más oscuro */
-  color: #fff;
-}
-
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 40px;
-  padding: 40px;
-}
-
-.product-card {
-  background: #fffaf0;
-  border-radius: 15px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
-  cursor: pointer;
-}
-.product-card img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-.product-card:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-}
-
-/* Botón centrado dentro de productos */
-.reset-btn {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  background: #d4af37; /* dorado */
-  color: #fff;
-  border: none;
-  border-radius: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  font-family: 'Brush Script MT', cursive;
-  transition: 0.3s;
-}
-.reset-btn:hover {
-  background: #b8860b; /* dorado más oscuro */
-  transform: scale(1.05);
-}
-
-/* Modal */
-.modal {
+.ventana-producto {
   display: none;
   position: fixed;
   z-index: 10;
@@ -168,44 +179,91 @@ footer {
   width: 100%; height: 100%;
   background-color: rgba(0,0,0,0.5);
 }
-.modal-content {
+.contenido-producto {
   background: #fffaf0;
   margin: 5% auto;
   padding: 20px;
   border-radius: 15px;
   width: 60%;
   text-align: center;
-  animation: fadeIn 0.5s;
+  animation: aparecer 0.5s;
 }
-.modal-content img {
+.contenido-producto img {
   max-width: 300px;
   border-radius: 10px;
   margin-bottom: 15px;
   transition: transform 0.5s ease;
 }
-.modal-content img:hover {
-  transform: scale(1.1);
-}
-.close {
+.contenido-producto img:hover { transform: scale(1.1); }
+.cerrar-ventana {
   float: right;
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
   color: #b8860b;
 }
-.close:hover {
-  color: #c44536;
-}
+.cerrar-ventana:hover { color: #c44536; }
 
-/* Animaciones */
-@keyframes fadeIn {
+#contenido-producto.rojo { background: linear-gradient(to bottom, #ffcccc, #ffffff); }
+#contenido-producto.verde { background: linear-gradient(to bottom, #ccffcc, #ffffff); }
+#contenido-producto.azul { background: linear-gradient(to bottom, #cce5ff, #ffffff); }
+
+@keyframes aparecer {
   from {opacity: 0; transform: scale(0.8);}
   to {opacity: 1; transform: scale(1);}
 }
-.fadeOut .modal-content {
-  animation: fadeOut 0.5s forwards;
-}
-@keyframes fadeOut {
+.desapareciendo .contenido-producto { animation: desapareciendo 0.5s forwards; }
+@keyframes desapareciendo {
   from {opacity: 1; transform: scale(1);}
   to {opacity: 0; transform: scale(0.8);}
+}
+
+@media (max-width: 600px) {
+  header { padding: 10px; }
+  h1 { font-size: 1.5em; }
+  .filtros, .filtros-color {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .filtros button, .filtros-color button {
+    flex: 1 1 40%;
+    margin: 5px;
+    font-size: 0.9em;
+    padding: 8px 12px;
+  }
+  .lista-productos {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
+  .tarjeta-producto img { height: 180px; }
+  .boton-limpiar-filtros { width: 80%; font-size: 0.9em; }
+  .contenido-producto { width: 90%; margin: 10% auto; padding: 15px; }
+  .contenido-producto img { max-width: 100%; height: auto; }
+}
+@media (min-width: 601px) and (max-width: 1024px) {
+  h1 { font-size: 2em; }
+  .filtros button, .filtros-color button {
+    flex: 1 1 30%;
+    margin: 5px;
+    font-size: 1em;
+  }
+  .lista-productos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    padding: 30px;
+  }
+  .tarjeta-producto img { height: 200px; }
+  .contenido-producto { width: 80%; }
+}
+@media (min-width: 1025px) {
+  h1 { font-size: 2.5em; }
+  .lista-productos {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    padding: 40px;
+  }
+  .tarjeta-producto img { height: 220px; }
+  .contenido-producto { width: 60%; }
 }

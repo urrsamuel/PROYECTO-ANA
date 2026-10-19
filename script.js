@@ -1,123 +1,100 @@
-// Variables globales
-let selectedCategory = "Todo";
-let selectedColor = null;
+let categoriaSeleccionada = "Todo";
+let colorSeleccionado = null;
 
-// Función para limpiar todos los filtros en un solo click
-function resetFilters() {
-  selectedCategory = "Todo";
-  selectedColor = null;
+function limpiarFiltros() {
+  categoriaSeleccionada = "Todo";
+  colorSeleccionado = null;
 
-  // Reset botones
-  document.querySelectorAll(".filters button, .colors button").forEach(btn => btn.classList.remove("active"));
-  document.getElementById("btn-todo").classList.add("active");
+  document.querySelectorAll(".filtros button, .filtros-color button").forEach((boton) => {
+    boton.classList.remove("activo");
+  });
+  document.getElementById("boton-todos").classList.add("activo");
 
-  // Reset fondo
   document.body.classList.remove("rojo", "verde", "azul");
-
-  applyFilters();
+  aplicarFiltros();
 }
 
-// Función para seleccionar categoría con toggle
-function toggleCategory(category) {
-  const btnId = "btn-" + category.toLowerCase();
-  const btn = document.getElementById(btnId);
+function cambiarCategoria(categoria) {
+  const boton = document.getElementById(`boton-${categoria.toLowerCase()}`);
 
-  // Si ya está seleccionada, desactiva
-  if (selectedCategory === category) {
-    selectedCategory = "Todo";
-    btn.classList.remove("active");
-    document.getElementById("btn-todo").classList.add("active");
+  if (categoriaSeleccionada === categoria) {
+    categoriaSeleccionada = "Todo";
+    boton?.classList.remove("activo");
+    document.getElementById("boton-todos").classList.add("activo");
   } else {
-    // Activa nueva categoría
-    selectedCategory = category;
-    document.querySelectorAll(".filters button").forEach(b => b.classList.remove("active"));
-    if (btn) btn.classList.add("active");
+    categoriaSeleccionada = categoria;
+    document.querySelectorAll(".filtros button").forEach((elemento) => {
+      elemento.classList.remove("activo");
+    });
+    boton?.classList.add("activo");
   }
 
-  applyFilters();
+  aplicarFiltros();
 }
 
-// Función para seleccionar color con toggle
-function toggleColor(color) {
-  const btnId = "btn-" + color.toLowerCase();
-  const btn = document.getElementById(btnId);
+function cambiarColor(color) {
+  const boton = document.getElementById(`boton-${color.toLowerCase()}`);
 
-  if (selectedColor === color) {
-    selectedColor = null;
-    if (btn) btn.classList.remove("active");
+  if (colorSeleccionado === color) {
+    colorSeleccionado = null;
+    boton?.classList.remove("activo");
     document.body.classList.remove("rojo", "verde", "azul");
   } else {
-    selectedColor = color;
-    document.querySelectorAll(".colors button").forEach(b => b.classList.remove("active"));
-    if (btn) btn.classList.add("active");
+    colorSeleccionado = color;
+    document.querySelectorAll(".filtros-color button").forEach((elemento) => {
+      elemento.classList.remove("activo");
+    });
+    boton?.classList.add("activo");
 
     document.body.classList.remove("rojo", "verde", "azul");
-    if (color === "Rojo") document.body.classList.add("rojo");
-    if (color === "Verde") document.body.classList.add("verde");
-    if (color === "Azul") document.body.classList.add("azul");
+    document.body.classList.add(color.toLowerCase());
   }
 
-  applyFilters();
+  aplicarFiltros();
 }
 
-// Aplicar filtros
-function applyFilters() {
-  const products = document.querySelectorAll(".product-card");
-  let visibleCount = 0;
+function aplicarFiltros() {
+  const tarjetas = document.querySelectorAll(".tarjeta-producto");
+  let productosVisibles = 0;
 
-  products.forEach(p => {
-    const category = p.getAttribute("data-category");
-    const color = p.getAttribute("data-color");
+  tarjetas.forEach((tarjeta) => {
+    const categoria = tarjeta.dataset.categoria;
+    const color = tarjeta.dataset.color;
+    const coincideCategoria = categoriaSeleccionada === "Todo" || categoria === categoriaSeleccionada;
+    const coincideColor = !colorSeleccionado || color === colorSeleccionado;
+    const esVisible = coincideCategoria && coincideColor;
 
-    const matchCategory = (selectedCategory === "Todo" || category === selectedCategory);
-    const matchColor = (!selectedColor || color === selectedColor);
-
-    if (matchCategory && matchColor) {
-      p.style.display = "block";
-      visibleCount++;
-    } else {
-      p.style.display = "none";
-    }
+    tarjeta.style.display = esVisible ? "block" : "none";
+    if (esVisible) productosVisibles++;
   });
 
-  // Mostrar mensaje si no hay productos visibles
-  const msg = document.getElementById("no-products-message");
-  if (visibleCount === 0) {
-    msg.style.display = "block";
-  } else {
-    msg.style.display = "none";
-  }
+  document.getElementById("mensaje-sin-productos").style.display =
+    productosVisibles === 0 ? "block" : "none";
 }
 
-// Modal
-function openModal(title, desc, price, color, img) {
-  document.getElementById('modal-title').innerText = title;
-  document.getElementById('modal-desc').innerText = desc;
-  document.getElementById('modal-price').innerText = price;
-  document.getElementById('modal-img').src = img;
+function mostrarProducto(titulo, descripcion, precio, color, imagen) {
+  document.getElementById("titulo-producto").innerText = titulo;
+  document.getElementById("descripcion-producto").innerText = descripcion;
+  document.getElementById("precio-producto").innerText = precio;
+  document.getElementById("imagen-producto").src = imagen.trim();
 
-  // Pintar fondo del modal según color con degradado
-  const modalContent = document.getElementById('modal-content');
-  modalContent.classList.remove("rojo", "verde", "azul");
-  if (color === "Rojo") modalContent.classList.add("rojo");
-  if (color === "Verde") modalContent.classList.add("verde");
-  if (color === "Azul") modalContent.classList.add("azul");
+  const contenidoVentana = document.getElementById("contenido-producto");
+  contenidoVentana.classList.remove("rojo", "verde", "azul");
+  contenidoVentana.classList.add(color.toLowerCase());
 
-  document.getElementById('modal').style.display = 'block';
+  document.getElementById("ventana-producto").style.display = "block";
 }
 
-function closeModal() {
-  const modal = document.getElementById('modal');
-  modal.classList.add('fadeOut');
+function cerrarProducto() {
+  const ventana = document.getElementById("ventana-producto");
+  ventana.classList.add("desapareciendo");
   setTimeout(() => {
-    modal.style.display = 'none';
-    modal.classList.remove('fadeOut');
+    ventana.style.display = "none";
+    ventana.classList.remove("desapareciendo");
   }, 500);
 }
 
-window.onclick = function(event) {
-  const modal = document.getElementById('modal');
-  if (event.target === modal) {
-    closeModal();
-  }
-}
+window.onclick = (evento) => {
+  const ventana = document.getElementById("ventana-producto");
+  if (evento.target === ventana) cerrarProducto();
+};
