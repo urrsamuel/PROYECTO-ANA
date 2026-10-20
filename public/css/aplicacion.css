@@ -1,0 +1,122 @@
+.logo-principal img {
+  display: block;
+  width: min(340px, 80vw);
+  height: auto;
+  margin: 0 auto;
+}
+
+.icono-red-social {
+  filter: brightness(0) saturate(100%) invert(63%) sepia(44%) saturate(627%) hue-rotate(5deg)
+    brightness(94%) contrast(91%);
+}
+
+.seccion-gestion textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-family: "Segoe UI", sans-serif;
+  resize: vertical;
+}
+
+.vista-previa-imagen {
+  width: min(220px, 100%);
+  max-height: 220px;
+  margin: 0 auto;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+.mensaje-imagen {
+  color: #a5362a;
+  text-align: center;
+}
+
+.productos-supabase {
+  max-width: 600px;
+  margin: 24px auto;
+  padding: 20px;
+  border-radius: 15px;
+  background: #fffaf0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.productos-supabase h2 {
+  text-align: center;
+}
+
+.productos-supabase ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.producto-admin-fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #e6d8c3;
+}
+
+.acciones-producto {
+  display: flex;
+  gap: 8px;
+}
+
+.acciones-producto button {
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 8px;
+  color: #fff;
+  font: 600 0.9rem "Segoe UI", sans-serif;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.acciones-producto button:hover {
+  transform: translateY(-1px);
+}
+
+.acciones-producto button:focus-visible {
+  outline: 3px solid #2f2f2f;
+  outline-offset: 2px;
+}
+
+.acciones-producto .boton-editar {
+  background: #b8860b;
+}
+
+.acciones-producto .boton-editar:hover {
+  background: #966d08;
+}
+
+.acciones-producto .boton-eliminar {
+  background: #c44536;
+}
+
+.acciones-producto .boton-eliminar:hover {
+  background: #a5362a;
+}
+
+.estado-supabase {
+  padding: 10px;
+  color: #b8860b;
+  text-align: center;
+}
+
+.estado-supabase[role="alert"] {
+  color: #c44536;
+}
+
+@media (max-width: 600px) {
+  .productos-supabase {
+    width: 90%;
+    padding: 16px;
+  }
+
+  .producto-admin-fila {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
