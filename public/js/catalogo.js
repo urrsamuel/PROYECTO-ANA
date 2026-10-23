@@ -59,7 +59,7 @@
     if (!lista) return;
 
     try {
-      const productos = await window.productosApi.listar();
+      const productos = await window.productosApi.get();
       if (!Array.isArray(productos)) throw new Error("La lista de productos recibida no es válida.");
 
       const idsActuales = new Set();

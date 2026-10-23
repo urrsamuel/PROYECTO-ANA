@@ -1,96 +1,93 @@
 (function () {
-  const camposObligatorios = ["nombre", "descripcion", "precio", "categoria", "color", "imagen"];
-  let productos = [];
-  let mensajeEstado;
-  let listaProductos;
+  const formularios = document.querySelectorAll(".seccion-gestion form");
+  if (formularios.length !== 3) return;
 
-  function mostrarEstado(mensaje, error = false) {
-    mensajeEstado.textContent = mensaje;
-    mensajeEstado.hidden = !mensaje;
-    mensajeEstado.setAttribute("role", error ? "alert" : "status");
+  const [agregar, editar, eliminar] = formularios;
+  const campos = ["nombre", "descripcion", "categoria", "color", "precio", "imagen"];
+  let productos = [];
+  let mensaje;
+  let lista;
+
+  function mostrarMensaje(texto, error = false) {
+    mensaje.textContent = texto;
+    mensaje.hidden = !texto;
+    mensaje.setAttribute("role", error ? "alert" : "status");
+  }
+
+  function campo(formulario, nombre, sufijo) {
+    return formulario.querySelector(`#${nombre}-${sufijo}`);
+  }
+
+  function agregarCampo(formulario, sufijo, nombre, titulo, tipo, opciones = []) {
+    const etiqueta = document.createElement("label");
+    etiqueta.htmlFor = `${nombre}-${sufijo}`;
+    etiqueta.textContent = titulo;
+    const etiquetaEntrada = tipo === "select" ? "select" : tipo;
+    const entrada = document.createElement(etiquetaEntrada);
+    entrada.id = `${nombre}-${sufijo}`;
+    if (tipo === "textarea") entrada.rows = 3;
+    opciones.forEach((valor) => entrada.add(new Option(valor, valor)));
+
+    const antesDe = nombre === "descripcion" ? campo(formulario, "nombre", sufijo) : campo(formulario, "categoria", sufijo);
+    antesDe.after(etiqueta, entrada);
+    return entrada;
   }
 
   function prepararFormulario(formulario, sufijo) {
-    const categoria = formulario.querySelector(`#categoria-${sufijo}`);
-    ["Aretes", "Pulseras"].forEach((nombre) => {
-      if ([...categoria.options].some((opcion) => opcion.value === nombre)) return;
-      categoria.add(new Option(nombre, nombre));
+    const categoria = campo(formulario, "categoria", sufijo);
+    ["Aretes", "Pulseras"].forEach((valor) => {
+      if (![...categoria.options].some((opcion) => opcion.value === valor)) {
+        categoria.add(new Option(valor, valor));
+      }
     });
+    agregarCampo(formulario, sufijo, "descripcion", "Descripción", "textarea");
+    agregarCampo(formulario, sufijo, "color", "Color", "select", ["Rojo", "Verde", "Azul"]);
 
-    const imagen = formulario.querySelector(`#imagen-${sufijo}`);
-    imagen.type = "text";
-    imagen.placeholder = "URL o ruta de la imagen";
-
-    const vistaPrevia = document.createElement("img");
-    vistaPrevia.className = "vista-previa-imagen";
-    vistaPrevia.alt = "Vista previa de la imagen del producto";
-    vistaPrevia.hidden = true;
-    const mensajeImagen = document.createElement("span");
-    mensajeImagen.className = "mensaje-imagen";
-    mensajeImagen.setAttribute("role", "status");
-    imagen.after(vistaPrevia, mensajeImagen);
-    imagen.addEventListener("input", () => actualizarVistaPrevia(imagen, vistaPrevia, mensajeImagen));
-
-    const etiquetaDescripcion = document.createElement("label");
-    etiquetaDescripcion.htmlFor = `descripcion-${sufijo}`;
-    etiquetaDescripcion.textContent = "Descripción";
-    const descripcion = document.createElement("textarea");
-    descripcion.id = `descripcion-${sufijo}`;
-    descripcion.rows = 3;
-    formulario.querySelector(`#nombre-${sufijo}`).after(etiquetaDescripcion, descripcion);
-
-    const etiquetaColor = document.createElement("label");
-    etiquetaColor.htmlFor = `color-${sufijo}`;
-    etiquetaColor.textContent = "Color";
-    const color = document.createElement("select");
-    color.id = `color-${sufijo}`;
-    ["Rojo", "Verde", "Azul"].forEach((nombre) => color.add(new Option(nombre, nombre)));
-    categoria.after(etiquetaColor, color);
+    const entradaImagen = campo(formulario, "imagen", sufijo);
+    entradaImagen.type = "text";
+    entradaImagen.placeholder = "Pega el enlace directo de la imagen";
+    const imagen = document.createElement("img");
+    imagen.className = "vista-previa-imagen";
+    imagen.alt = "Vista previa de la imagen del producto";
+    imagen.hidden = true;
+    const aviso = document.createElement("span");
+    aviso.className = "mensaje-imagen";
+    entradaImagen.after(imagen, aviso);
+    entradaImagen.addEventListener("input", () => mostrarVistaPrevia(formulario, sufijo));
   }
 
-  function actualizarVistaPrevia(campoImagen, vistaPrevia, mensaje) {
-    const ruta = campoImagen.value.trim();
-    vistaPrevia.hidden = true;
-    mensaje.textContent = "";
-    vistaPrevia.onload = () => {
-      vistaPrevia.hidden = false;
-      mensaje.textContent = "";
-    };
-    vistaPrevia.onerror = () => {
-      vistaPrevia.hidden = true;
-      mensaje.textContent = ruta ? "No se pudo cargar la imagen. Usa un enlace directo a un archivo de imagen." : "";
-    };
-    vistaPrevia.removeAttribute("src");
-    if (ruta) vistaPrevia.src = ruta;
+  function mostrarVistaPrevia(formulario, sufijo) {
+    const ruta = campo(formulario, "imagen", sufijo).value.trim();
+    const imagen = formulario.querySelector(".vista-previa-imagen");
+    const aviso = formulario.querySelector(".mensaje-imagen");
+    imagen.hidden = true;
+    aviso.textContent = "";
+    imagen.onload = () => { imagen.hidden = false; };
+    imagen.onerror = () => { aviso.textContent = "Usa un enlace directo a una imagen válida."; };
+    if (ruta) imagen.src = ruta;
+    else imagen.removeAttribute("src");
   }
 
-  function obtenerValor(formulario, campo, sufijo) {
-    return formulario.querySelector(`#${campo}-${sufijo}`).value.trim();
-  }
-
-  function productoDesde(formulario, sufijo) {
-    const precio = obtenerValor(formulario, "precio", sufijo);
-    const producto = {
-      nombre: obtenerValor(formulario, "nombre", sufijo),
-      descripcion: obtenerValor(formulario, "descripcion", sufijo),
-      precio: precio === "" ? "" : Number(precio),
-      categoria: obtenerValor(formulario, "categoria", sufijo),
-      color: obtenerValor(formulario, "color", sufijo),
-      imagen: obtenerValor(formulario, "imagen", sufijo),
+  function leerProducto(formulario, sufijo) {
+    const leer = (nombre) => campo(formulario, nombre, sufijo).value.trim();
+    const nombre = leer("nombre");
+    const color = leer("color");
+    return {
+      nombre,
+      descripcion: leer("descripcion") || `${nombre} artesanal color ${color.toLowerCase()}.`,
+      categoria: leer("categoria"),
+      color,
+      precio: Number(leer("precio")),
+      imagen: leer("imagen") || "/imagenes/Logo/LOGO.png",
     };
-    if (!producto.descripcion) {
-      producto.descripcion = `${producto.nombre} artesanal color ${producto.color.toLowerCase()}.`;
-    }
-    if (!producto.imagen) producto.imagen = "/imagenes/Logo/LOGO.png";
-    return producto;
   }
 
   function mostrarProductos() {
-    listaProductos.replaceChildren();
-    if (productos.length === 0) {
-      const sinProductos = document.createElement("li");
-      sinProductos.textContent = "Todavía no hay productos agregados.";
-      listaProductos.append(sinProductos);
+    lista.replaceChildren();
+    if (!productos.length) {
+      const vacio = document.createElement("li");
+      vacio.textContent = "Todavía no hay productos agregados.";
+      lista.append(vacio);
       return;
     }
 
@@ -98,159 +95,130 @@
       const fila = document.createElement("li");
       fila.className = "producto-admin-fila";
       const detalle = document.createElement("span");
-      detalle.textContent = `#${producto.id} · ${producto.nombre} · $${new Intl.NumberFormat(
-        "es-CO",
-        { maximumFractionDigits: 0 },
-      ).format(Number(producto.precio) || 0)}`;
-
-      const editar = document.createElement("button");
-      editar.type = "button";
-      editar.className = "boton-editar";
-      editar.textContent = "Editar";
-      editar.addEventListener("click", () => seleccionarProducto(producto));
-
-      const eliminar = document.createElement("button");
-      eliminar.type = "button";
-      eliminar.className = "boton-eliminar";
-      eliminar.textContent = "Eliminar";
-      eliminar.addEventListener("click", () => borrarProducto(producto));
-
+      const precio = new Intl.NumberFormat("es-CO", { maximumFractionDigits: 0 })
+        .format(Number(producto.precio) || 0);
+      detalle.textContent = `#${producto.id} · ${producto.nombre} · $${precio}`;
       const acciones = document.createElement("span");
       acciones.className = "acciones-producto";
-      acciones.append(editar, eliminar);
+
+      [["Editar", "boton-editar", () => seleccionarProducto(producto)],
+      ["Eliminar", "boton-eliminar", () => eliminarProducto(producto)]].forEach(
+        ([texto, clase, accion]) => {
+          const boton = document.createElement("button");
+          boton.type = "button";
+          boton.className = clase;
+          boton.textContent = texto;
+          boton.addEventListener("click", accion);
+          acciones.append(boton);
+        },
+      );
       fila.append(detalle, acciones);
-      listaProductos.append(fila);
+      lista.append(fila);
     });
   }
 
   async function cargarProductos() {
-    productos = await window.productosApi.listar();
-    if (!Array.isArray(productos)) throw new Error("La lista de Supabase no es válida.");
+    productos = await window.productosApi.get();
+    if (!Array.isArray(productos)) throw new Error("La lista de productos no es válida.");
     mostrarProductos();
   }
 
   function seleccionarProducto(producto) {
-    const formulario = document.querySelector("#formulario-editar");
-    formulario.querySelector("#id-edicion").value = producto.id;
-    ["nombre", "descripcion", "categoria", "color", "precio", "imagen"].forEach((campo) => {
-      formulario.querySelector(`#${campo}-edicion`).value = producto[campo] ?? "";
+    campo(editar, "id", "edicion").value = producto.id;
+    campos.forEach((nombre) => {
+      campo(editar, nombre, "edicion").value = producto[nombre] ?? "";
     });
-    const campoImagen = formulario.querySelector("#imagen-edicion");
-    actualizarVistaPrevia(
-      campoImagen,
-      formulario.querySelector(".vista-previa-imagen"),
-      formulario.querySelector(".mensaje-imagen"),
-    );
-    formulario.scrollIntoView({ behavior: "smooth", block: "center" });
+    mostrarVistaPrevia(editar, "edicion");
+    editar.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
-  async function borrarProducto(producto) {
-    if (!window.confirm(`¿Eliminar "${producto.nombre}" del catálogo?`)) return;
+  async function guardarProducto(evento, esEdicion = false) {
+    evento.preventDefault();
+    const formulario = esEdicion ? editar : agregar;
+    const sufijo = esEdicion ? "edicion" : "producto";
+    const producto = leerProducto(formulario, sufijo);
+    const precioVacio = !campo(formulario, "precio", sufijo).value.trim();
+
+    if (campos.some((nombre) => nombre !== "precio" && !producto[nombre]) ||
+      precioVacio || !Number.isFinite(producto.precio) || producto.precio < 0) {
+      mostrarMensaje("Completa los datos del producto y verifica el precio.", true);
+      return;
+    }
+
     try {
-      const eliminados = await window.productosApi.eliminar(producto.id);
-      if (!Array.isArray(eliminados) || eliminados.length !== 1) {
-        throw new Error("Supabase no confirmó la eliminación. Revisa la política SELECT de la tabla.");
+      const id = campo(formulario, "id", sufijo)?.value;
+      if (esEdicion && !productos.some((item) => String(item.id) === id)) {
+        mostrarMensaje("Selecciona un producto de la lista antes de editarlo.", true);
+        return;
       }
+      const respuesta = esEdicion
+        ? await window.productosApi.patch(`/api/productos?id=${encodeURIComponent(id)}`, producto)
+        : await window.productosApi.post("/api/productos", producto);
+      if (!Array.isArray(respuesta) || respuesta.length !== 1) {
+        throw new Error("No se confirmó el guardado. Revisa los permisos de Supabase.");
+      }
+      if (!esEdicion) localStorage.setItem("catalogo-supabase-activo", "true");
+      formulario.reset();
+      mostrarVistaPrevia(formulario, sufijo);
       await cargarProductos();
-      mostrarEstado("Producto eliminado del catálogo.");
+      mostrarMensaje(esEdicion ? "Producto actualizado." : "Producto agregado al catálogo.");
     } catch (error) {
-      console.error("No se pudo eliminar el producto:", error);
-      mostrarEstado(error.message, true);
+      console.error("No se pudo guardar el producto:", error);
+      mostrarMensaje(error.message, true);
     }
   }
 
-  function prepararCrud() {
-    const formularios = document.querySelectorAll(".seccion-gestion form");
-    if (formularios.length !== 3) return;
-    const [agregar, editar, eliminar] = formularios;
+  async function eliminarProducto(producto) {
+    if (!window.confirm(`¿Eliminar "${producto.nombre}" del catálogo?`)) return;
+    try {
+      const respuesta = await window.productosApi.delete(
+        `/api/productos?id=${encodeURIComponent(producto.id)}`,
+      );
+      if (!Array.isArray(respuesta) || respuesta.length !== 1) {
+        throw new Error("No se confirmó la eliminación. Revisa los permisos de Supabase.");
+      }
+      await cargarProductos();
+      mostrarMensaje("Producto eliminado del catálogo.");
+    } catch (error) {
+      console.error("No se pudo eliminar el producto:", error);
+      mostrarMensaje(error.message, true);
+    }
+  }
+
+  function iniciarCrud() {
     editar.id = "formulario-editar";
     prepararFormulario(agregar, "producto");
     prepararFormulario(editar, "edicion");
 
-    mensajeEstado = document.createElement("p");
-    mensajeEstado.className = "estado-supabase";
-    mensajeEstado.hidden = true;
-    agregar.before(mensajeEstado);
-
+    mensaje = document.createElement("p");
+    mensaje.className = "estado-supabase";
+    mensaje.hidden = true;
+    agregar.before(mensaje);
     const panel = document.createElement("section");
     panel.className = "productos-supabase";
     const titulo = document.createElement("h2");
     titulo.textContent = "Productos del catálogo";
-    listaProductos = document.createElement("ul");
-    panel.append(titulo, listaProductos);
+    lista = document.createElement("ul");
+    panel.append(titulo, lista);
     editar.parentElement.before(panel);
 
-    agregar.addEventListener("submit", async (evento) => {
+    agregar.addEventListener("submit", (evento) => guardarProducto(evento));
+    editar.addEventListener("submit", (evento) => guardarProducto(evento, true));
+    eliminar.addEventListener("submit", (evento) => {
       evento.preventDefault();
-      const producto = productoDesde(agregar, "producto");
-      if (
-        camposObligatorios.some((campo) => producto[campo] === "" || producto[campo] === undefined) ||
-        !Number.isFinite(producto.precio)
-      ) {
-        mostrarEstado("Completa el nombre y el precio del producto.", true);
-        return;
-      }
-      try {
-        const creados = await window.productosApi.crear(producto);
-        if (!Array.isArray(creados) || creados.length !== 1) {
-          throw new Error("Supabase no confirmó el producto. Revisa la política SELECT.");
-        }
-        localStorage.setItem("catalogo-supabase-activo", "true");
-        agregar.reset();
-        await cargarProductos();
-        mostrarEstado("Producto agregado y visible en el catálogo.");
-      } catch (error) {
-        console.error("No se pudo agregar el producto:", error);
-        mostrarEstado(error.message, true);
-      }
-    });
-
-    editar.addEventListener("submit", async (evento) => {
-      evento.preventDefault();
-      const id = obtenerValor(editar, "id", "edicion");
-      if (!productos.some((producto) => String(producto.id) === id)) {
-        mostrarEstado("Selecciona un producto de la lista para editarlo.", true);
-        return;
-      }
-      const cambios = productoDesde(editar, "edicion");
-      if (!Number.isFinite(cambios.precio)) {
-        mostrarEstado("Escribe un precio válido para el producto.", true);
-        return;
-      }
-      try {
-        const actualizados = await window.productosApi.actualizar(id, cambios);
-        if (!Array.isArray(actualizados) || actualizados.length !== 1) {
-          throw new Error("Supabase no confirmó los cambios. Revisa la política SELECT.");
-        }
-        await cargarProductos();
-        mostrarEstado("Producto actualizado en el catálogo.");
-      } catch (error) {
-        console.error("No se pudo actualizar el producto:", error);
-        mostrarEstado(error.message, true);
-      }
-    });
-
-    eliminar.addEventListener("submit", async (evento) => {
-      evento.preventDefault();
-      const id = obtenerValor(eliminar, "id", "eliminar");
-      const producto = productos.find((elemento) => String(elemento.id) === id);
-      if (!producto) {
-        mostrarEstado("El ID no corresponde a un producto del catálogo.", true);
-        return;
-      }
-      await borrarProducto(producto);
-      eliminar.reset();
+      const id = campo(eliminar, "id", "eliminar").value.trim();
+      const producto = productos.find((item) => String(item.id) === id);
+      if (producto) eliminarProducto(producto);
+      else mostrarMensaje("Escribe el número de un producto de la lista.", true);
     });
 
     cargarProductos().catch((error) => {
       console.error("No se pudieron cargar los productos:", error);
-      mostrarEstado(error.message, true);
+      mostrarMensaje(error.message, true);
     });
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", prepararCrud, { once: true });
-  } else {
-    prepararCrud();
-  }
+    document.addEventListener("DOMContentLoaded", iniciarCrud, { once: true });
+  } else iniciarCrud();
 })();
