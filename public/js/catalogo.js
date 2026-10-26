@@ -9,8 +9,8 @@
     }
     estado.textContent = mensaje;
     estado.hidden = !mensaje;
-  }
-
+  } 
+ 
   function imagenProducto(valor) {
     const imagen = String(valor || "").trim();
     if (/^(https?:\/\/|data:image\/)/i.test(imagen) || imagen.startsWith("/")) return imagen;
@@ -27,6 +27,7 @@
   }
 
   function crearTarjeta(producto) {
+
     const tarjeta = document.createElement("div");
     tarjeta.className = "tarjeta-producto";
     tarjeta.dataset.categoria = producto.categoria || "";
@@ -48,8 +49,10 @@
         producto.descripcion || "",
         precioProducto(producto.precio),
         producto.color || "Rojo",
-        imagen.src,
-      );
+          /(?:^|\/)PRODUCTOFISICO1\.jpeg$/i.test(String(producto.imagen || "").trim())
+            ? imagen.src.replace(/PRODUCTOFISICO1\.jpeg$/i, "PRODUCTOFISICO.jpeg")
+            : imagen.src,
+        );
     });
     return tarjeta;
   }
@@ -64,11 +67,14 @@
 
       const idsActuales = new Set();
       productos.forEach((producto) => {
+
         const id = String(producto.id);
         idsActuales.add(id);
+
         const selector = `[data-id-supabase="${CSS.escape(id)}"]`;
         const tarjetaActual = lista.querySelector(selector);
         const tarjeta = crearTarjeta(producto);
+
         if (tarjetaActual) tarjetaActual.replaceWith(tarjeta);
         else lista.append(tarjeta);
       });
@@ -80,11 +86,13 @@
       if (productos.length > 0) {
         localStorage.setItem("catalogo-supabase-activo", "true");
       }
+      
       const usarSupabase =
         productos.length > 0 || localStorage.getItem("catalogo-supabase-activo") === "true";
       lista.querySelectorAll(".tarjeta-producto:not([data-id-supabase])").forEach((tarjeta) => {
         tarjeta.style.display = usarSupabase ? "none" : "";
       });
+
       mostrarEstado(lista.parentElement, "");
     } catch (error) {
       console.error("No se pudo cargar el catálogo desde Supabase:", error);

@@ -239,7 +239,7 @@ const productos = await window.productosApi.get();
 const creados = await window.productosApi.post("/api/productos", producto);
 ```
 
-La función `solicitar` usa `fetch`, convierte los datos a JSON y revisa si el servidor respondió con error. Por eso la interfaz puede escribir peticiones como `get` o `post`, aunque no se instaló Axios.
+La función `solicitar` usa el método HTTP recibido (`GET`, `POST`, `PATCH` o `DELETE`), convierte los datos a JSON y revisa si el servidor respondió con error. Es importante conservar ese método: la API solo crea, actualiza o elimina cuando recibe el verbo correspondiente.
 
 ### 2. Crear un producto: `public/js/crud.js`
 
@@ -358,7 +358,7 @@ El campo `imagen` guarda una dirección, no sube el archivo a Supabase Storage. 
 https://sitio-publico.com/imagen.jpg
 ```
 
-El CRUD muestra una vista previa del enlace antes de guardar. El catálogo convierte rutas relativas del proyecto a rutas utilizables en el navegador. Para un enlace externo, el sitio que aloja la imagen debe permitir que el navegador la cargue.
+El CRUD muestra una vista previa del enlace antes de guardar. El catálogo convierte rutas relativas del proyecto a rutas utilizables en el navegador. Para un enlace externo, el sitio que aloja la imagen debe permitir que el navegador la cargue. La tarjeta de la manilla usa `/imagenes/PRODUCTOFISICO1.jpeg`; al abrir su detalle, se muestra `/imagenes/PRODUCTOFISICO.jpeg`.
 
 ## Archivos del navegador en `public`
 
@@ -483,6 +483,10 @@ La conexión puede estar funcionando correctamente y simplemente no haber filas 
 ### La imagen no aparece
 
 Verifica que el enlace sea directo y accesible desde el navegador. Las rutas locales deben corresponder a un archivo que realmente exista dentro de `imagenes/`.
+
+### Agregar, editar o eliminar no funciona
+
+El cliente debe enviar cada operación con su verbo HTTP (`POST`, `PATCH` o `DELETE`). Si el helper manda siempre `GET`, el servidor no ejecuta el cambio aunque el formulario llame al método correcto. En este CRUD, el campo de imagen recibe una ruta o URL; no sube archivos.
 
 ### No aparece el formulario o la lista del CRUD
 

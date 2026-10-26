@@ -1,7 +1,7 @@
 (function () {
-  async function solicitar(metodo, url, datos) {
+  async function solicitar(method, url, datos) {
     const respuesta = await fetch(url, {
-      method: metodo,
+      method,
       headers: datos ? { "Content-Type": "application/json" } : {},
       body: datos ? JSON.stringify(datos) : undefined,
     });

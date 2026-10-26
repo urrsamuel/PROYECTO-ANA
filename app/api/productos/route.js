@@ -3,7 +3,7 @@ import {
   crearProducto,
   eliminarProducto,
   listarProductos,
-} from "../../../lib/productos";
+} from "../../../lib/productos.js";
 
 export const dynamic = "force-dynamic";
 

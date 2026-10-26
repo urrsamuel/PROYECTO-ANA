@@ -84,7 +84,7 @@
 }
 
 .acciones-producto .boton-editar {
-  background: #b8860b;
+  background: #ffe39b;
 }
 
 .acciones-producto .boton-editar:hover {
@@ -92,11 +92,11 @@
 }
 
 .acciones-producto .boton-eliminar {
-  background: #c44536;
+  background: #deb244;
 }
 
 .acciones-producto .boton-eliminar:hover {
-  background: #a5362a;
+  background: #ffe39b;
 }
 
 .estado-supabase {

@@ -20,7 +20,7 @@
     <h2>Agregar producto</h2>
     <form>
       <label for="nombre-producto">Nombre del accesorio</label>
-      <input type="text" id="nombre-producto" placeholder="Ej: Manilla Azul">
+      <input type="text" id="nombre-producto" value="Manilla artesanal" placeholder="Ej: Manilla Azul">
 
       <label for="categoria-producto">Categoría</label>
       <select id="categoria-producto">
@@ -30,10 +30,10 @@
       </select>
 
       <label for="precio-producto">Precio</label>
-      <input type="number" id="precio-producto" placeholder="Ej: 25000">
+      <input type="number" id="precio-producto" placeholder="Ej: 25000" min="0">
 
       <label for="imagen-producto">Imagen</label>
-      <input type="file" id="imagen-producto">
+      <input type="text" id="imagen-producto" value="/imagenes/PRODUCTOFISICO1.jpeg" placeholder="Ej: /imagenes/PRODUCTOFISICO1.jpeg">
 
       <button type="submit">Agregar</button>
     </form>
@@ -60,7 +60,7 @@
       <input type="number" id="precio-edicion" placeholder="Ej: 30000">
 
       <label for="imagen-edicion">Nueva imagen</label>
-      <input type="file" id="imagen-edicion">
+      <input type="text" id="imagen-edicion" placeholder="Pega la ruta de la imagen">
 
       <button type="submit">Actualizar</button>
     </form>

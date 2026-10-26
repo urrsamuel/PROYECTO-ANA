@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { calcularTotalProductos } from "../lib/total-productos.mjs";
+import { calcularTotalProductos } from "../lib/total-productos.js";
 
 test("suma los precios de todos los productos", () => {
   const productos = [
@@ -19,5 +19,6 @@ test("acepta precios recibidos como texto", () => {
 });
 
 test("el total es cero cuando no hay productos", () => {
+
   assert.equal(calcularTotalProductos([]), 0);
 });
